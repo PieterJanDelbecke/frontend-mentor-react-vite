@@ -1,6 +1,7 @@
-import React from "react";
+import { useState } from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+import { Link } from "react-router-dom";
 
 import SnapLogo from "../images/logo.svg";
 
@@ -58,13 +59,47 @@ const Button = styled.button`
 		`}
 `;
 
+const FeaturesDiv = styled.div`
+	position: absolute;
+	width: 240px;
+	height: 400px;
+	border: 1px solid blue;
+	right: 0px;
+    top: 40px;
+    background-color: white;
+`;
+
+const FeatureLink = styled(Link)`
+    display: block;
+    text-decoration: none;
+`
+
 const NavBar = () => {
+	const [showFeatures, setShowFeatures] = useState(false);
+	const [showCompany, setShowCompany] = useState(false);
+
+	const handleShowFeatures = () => {
+		setShowFeatures((prevValue) => !prevValue);
+	};
+
+	const handleShowCompany = () => {
+		setShowCompany((prevValue) => !prevValue);
+	};
+
 	return (
 		<Container>
 			<LeftDiv>
 				<Logo src={SnapLogo} alt="logo" />
-				<Button>Features</Button>
-				<Button>Company</Button>
+				<Button onClick={handleShowFeatures}>
+					Features
+					<FeaturesDiv>
+                        <FeatureLink to="/">ToDo List</FeatureLink>
+                        <FeatureLink to="/">Calendar</FeatureLink>
+                        <FeatureLink to="/">Reminders</FeatureLink>
+                        <FeatureLink to="/">Planning</FeatureLink>
+                    </FeaturesDiv>
+				</Button>
+				<Button onClick={handleShowCompany}>Company</Button>
 				<Button>Careers</Button>
 				<Button>About</Button>
 			</LeftDiv>
