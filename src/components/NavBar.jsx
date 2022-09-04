@@ -4,6 +4,10 @@ import { css } from "@emotion/react";
 import { Link } from "react-router-dom";
 
 import SnapLogo from "../images/logo.svg";
+import ToDoIcon from "../images/icon-todo.svg";
+import CalendarIcon from "../images/icon-calendar.svg";
+import RemindersIcon from "../images/icon-reminders.svg";
+import PlanningIcon from "../images/icon-planning.svg";
 
 const Container = styled.nav`
 	position: relative;
@@ -62,17 +66,42 @@ const Button = styled.button`
 const FeaturesDiv = styled.div`
 	position: absolute;
 	width: 240px;
-	height: 400px;
 	border: 1px solid blue;
 	right: 0px;
-    top: 40px;
-    background-color: white;
+	top: 40px;
+	background-color: white;
+    display: ${(props) => (props.showFeatures ? 'block' : 'none')};
 `;
 
 const FeatureLink = styled(Link)`
-    display: block;
-    text-decoration: none;
-`
+	display: block;
+	text-decoration: none;
+`;
+
+const LinkDiv = styled.div`
+	margin: 12px auto;
+	width: 200px;
+    height: 24px;
+	border: 1px red solid;
+	position: relative;
+`;
+
+const LinkText = styled.p`
+	display: inline-block;
+	position: absolute;
+	border: 1px red solid;
+    left: 90px;
+    font-size: 18px;
+`;
+
+const LinkIcon = styled.img`
+    left: 24px;
+	position: absolute;
+	border: 1px red solid;
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+`;
 
 const NavBar = () => {
 	const [showFeatures, setShowFeatures] = useState(false);
@@ -92,12 +121,32 @@ const NavBar = () => {
 				<Logo src={SnapLogo} alt="logo" />
 				<Button onClick={handleShowFeatures}>
 					Features
-					<FeaturesDiv>
-                        <FeatureLink to="/">ToDo List</FeatureLink>
-                        <FeatureLink to="/">Calendar</FeatureLink>
-                        <FeatureLink to="/">Reminders</FeatureLink>
-                        <FeatureLink to="/">Planning</FeatureLink>
-                    </FeaturesDiv>
+					<FeaturesDiv showFeatures={showFeatures}>
+						<FeatureLink to="/">
+							<LinkDiv>
+								<LinkIcon src={ToDoIcon}></LinkIcon>
+								<LinkText>ToDo List</LinkText>
+							</LinkDiv>
+						</FeatureLink>
+						<FeatureLink to="/">
+							<LinkDiv>
+								<LinkIcon src={CalendarIcon}></LinkIcon>
+								<LinkText>Calendar</LinkText>
+							</LinkDiv>
+						</FeatureLink>
+						<FeatureLink to="/">
+							<LinkDiv>
+								<LinkIcon src={RemindersIcon}></LinkIcon>
+								<LinkText>Reminders</LinkText>
+							</LinkDiv>
+						</FeatureLink>
+						<FeatureLink to="/">
+							<LinkDiv>
+								<LinkIcon src={PlanningIcon}></LinkIcon>
+								<LinkText>Planning</LinkText>
+							</LinkDiv>
+						</FeatureLink>
+					</FeaturesDiv>
 				</Button>
 				<Button onClick={handleShowCompany}>Company</Button>
 				<Button>Careers</Button>
